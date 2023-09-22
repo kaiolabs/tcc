@@ -1,0 +1,50 @@
+name: tcc
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  supabase_flutter: ^1.10.7
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  intl: ^0.18.0
+  flutter_modular: ^5.0.3
+  logger: ^1.4.0
+  flutter_dotenv: ^5.1.0
+  flutter_svg: ^2.0.7
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/images/
+
+  fonts:
+    - family: TTNorms_Bold
+      fonts:
+        - asset: assets/fonts/TTNormsPro_Bold.ttf
+          
+    - family: TTNorms_Medium
+      fonts:
+        - asset: assets/fonts/TTNormsPro_Medium.ttf
+          
+    - family: TTNorms_Regular
+      fonts:
+        - asset: assets/fonts/TTNormsPro_Regular.ttf
+          
+    - family: TTNorms_Light
+      fonts:
+        - asset: assets/fonts/TTNormsPro_Light.ttf
