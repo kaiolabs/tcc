@@ -24,7 +24,7 @@ abstract interface class IMethodsApi {
     required String table,
     List extras = const [],
     required Json body,
-    String? filter,
+    Json filter = const {},
   }) async {
     return (false, '');
   }

@@ -29,6 +29,7 @@ class InputFieldPattern extends StatelessWidget {
   final bool passwordMode;
   final Color colorLabel;
   final String hintText;
+  final bool readOnly;
 
   const InputFieldPattern({
     super.key,
@@ -55,6 +56,7 @@ class InputFieldPattern extends StatelessWidget {
     this.passwordMode = false,
     this.colorLabel = Colors.black,
     this.hintText = '',
+    this.readOnly = false,
   });
 
   @override
@@ -75,9 +77,9 @@ class InputFieldPattern extends StatelessWidget {
                     Expanded(
                       child: TextPattern(
                         text: label,
-                        fontSize: 12,
+                        fontSize: 16,
                         color: colorLabel,
-                      ).medium(),
+                      ).regular(),
                     ),
                     const SizedBox(width: 10),
                   ],
@@ -106,6 +108,7 @@ class InputFieldPattern extends StatelessWidget {
             formatMoney: formatMoney,
             multiline: multiline,
             passwordMode: passwordMode,
+            readOnly: readOnly,
           ),
         ],
       ),

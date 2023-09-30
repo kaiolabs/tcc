@@ -7,7 +7,7 @@ import '../../../core/theme/color_outlet.dart';
 import '../controller/home_controller.dart';
 import 'avaliacoes.dart';
 import 'configs.dart';
-import 'meu_tcc.dart';
+import 'tcc_page.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -59,65 +59,98 @@ class _HomeViewState extends PageState<HomeView, HomeController> {
                     ),
                   ],
                 ),
-                Column(
-                  children: [
-                    buttonLateral(
-                      label: 'Meu TCC',
-                      isSelect: controller.currentPage.value == 0,
-                      icon: Icons.description,
-                      onPressed: () {
-                        controller.currentPage.value = 0;
-                        controller.pageController.jumpToPage(0);
-                      },
+                ValueListenableBuilder(
+                  valueListenable: controller.user,
+                  builder: (context, value, child) => ValueListenableBuilder(
+                    valueListenable: controller.currentPage,
+                    builder: (context, value, child) => Column(
+                      children: [
+                        Visibility(
+                          visible: controller.user.value.type == 'Aluno' || controller.user.value.type == 'Coordenador',
+                          child: buttonLateral(
+                            label: 'Gereciamento de TCC',
+                            isSelect: controller.currentPage.value == 0,
+                            icon: Icons.description,
+                            onPressed: () {
+                              controller.currentPage.value = 0;
+                              controller.pageController.jumpToPage(0);
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.user.value.type == 'Aluno',
+                          child: buttonLateral(
+                            label: 'Reuniões',
+                            isSelect: controller.currentPage.value == 1,
+                            icon: Icons.groups,
+                            onPressed: () {
+                              controller.currentPage.value = 1;
+                              controller.pageController.jumpToPage(1);
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.user.value.type == 'Professor',
+                          child: buttonLateral(
+                            label: 'Avaliações',
+                            isSelect: controller.currentPage.value == 2,
+                            icon: Icons.thumbs_up_down,
+                            onPressed: () {
+                              controller.currentPage.value = 2;
+                              controller.pageController.jumpToPage(2);
+                            },
+                          ),
+                        ),
+                        Visibility(
+                          visible: controller.user.value.type == 'Coordenador',
+                          child: buttonLateral(
+                            label: 'Cronograma',
+                            isSelect: controller.currentPage.value == 3,
+                            icon: Icons.calendar_month,
+                            onPressed: () {
+                              controller.currentPage.value = 3;
+                              controller.pageController.jumpToPage(3);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    buttonLateral(
-                      label: 'Reuniões',
-                      isSelect: controller.currentPage.value == 1,
-                      icon: Icons.groups,
-                      onPressed: () {
-                        controller.currentPage.value = 1;
-                        controller.pageController.jumpToPage(1);
-                      },
-                    ),
-                    buttonLateral(
-                      label: 'Avaliações',
-                      isSelect: controller.currentPage.value == 2,
-                      icon: Icons.thumbs_up_down,
-                      onPressed: () {
-                        controller.currentPage.value = 2;
-                        controller.pageController.jumpToPage(2);
-                      },
-                    ),
-                    buttonLateral(
-                      label: 'Configurações',
-                      isSelect: controller.currentPage.value == 2,
-                      icon: Icons.settings,
-                      onPressed: () {
-                        controller.currentPage.value = 3;
-                        controller.pageController.jumpToPage(3);
-                      },
-                    ),
-                  ],
-                )
+                  ),
+                ),
               ],
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 40, left: 40, right: 40),
-              child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: controller.pageController,
-                children: const [
-                  MeuTcc(),
-                  Reunioes(),
-                  Avaliacoes(),
-                  Configs(),
-                ],
+          ValueListenableBuilder(
+            valueListenable: controller.user,
+            builder: (context, value, child) => SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 40, left: 40, right: 40),
+                child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: controller.pageController,
+                  children: [
+                    Visibility(
+                      visible: controller.user.value.type == 'Aluno' || controller.user.value.type == 'Coordenador',
+                      child: const TccPage(),
+                    ),
+                    Visibility(
+                      visible: controller.user.value.type == 'Aluno',
+                      child: const Reunioes(),
+                    ),
+                    Visibility(
+                      visible: controller.user.value.type == 'Professor',
+                      child: const Avaliacoes(),
+                    ),
+                    Visibility(
+                      visible: controller.user.value.type == 'Coordenador',
+                      child: const Configs(),
+                    ),
+                  ],
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -133,7 +166,7 @@ Widget buttonLateral({
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Material(
-      color: Colors.transparent,
+      color: Colors.white.withOpacity(isSelect ? 0.2 : 0),
       child: InkWell(
         onTap: () {
           onPressed.call();

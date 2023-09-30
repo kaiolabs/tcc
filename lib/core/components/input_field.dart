@@ -30,6 +30,7 @@ class InputField extends StatefulWidget {
   final String initialValue;
   final bool formatMoney;
   final bool multiline;
+  final bool readOnly;
   InputField({
     super.key,
     required this.controller,
@@ -55,6 +56,7 @@ class InputField extends StatefulWidget {
     this.initialValue = '',
     this.formatMoney = false,
     this.multiline = false,
+    this.readOnly = false,
   });
 
   @override
@@ -81,7 +83,7 @@ class _InputFieldState extends State<InputField> {
           keyboardType: (isIOS && widget.keyboardType == TextInputType.number)
               ? const TextInputType.numberWithOptions(signed: true, decimal: true)
               : widget.keyboardType,
-          maxLines: widget.multiline ? 6 : 1,
+          maxLines: widget.multiline ? 12 : 1,
           validator: widget.validator,
           autovalidateMode: widget.autovalidateMode,
           onChanged: (value) {
@@ -91,7 +93,7 @@ class _InputFieldState extends State<InputField> {
           },
           cursorColor: ColorOutlet.primaryColor,
           onTap: widget.onTap,
-          readOnly: widget.onTap != null,
+          readOnly: widget.onTap != null || widget.readOnly,
           decoration: InputDecoration(
             counterText: '',
             prefixIcon: widget.prefixIcon != null
