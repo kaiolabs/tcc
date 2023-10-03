@@ -351,18 +351,22 @@ class _AvaliacoesState extends PageState<Avaliacoes, AvaliacoesController> {
                         shrinkWrap: true,
                         itemCount: controller.listTccs.value.length,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) => CardTcc(
-                          tcc: controller.listTccs.value[index],
-                          isAvaliacao: homeController.user.value.type == 'Professor',
-                          onPressedInitAvaliacao: () {
-                            controller.checkIfUserAlreadyGaveANote(controller.listTccs.value[index].id.toString()).then((value) {
-                              if (value.$1) {
-                                snackBarMessenger(context: context, message: value.$2, color: Colors.red);
-                              } else {
-                                controller.openReuniao(controller.listTccs.value[index]);
-                              }
-                            });
-                          },
+                        itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: CardTcc(
+                            tcc: controller.listTccs.value[index],
+                            isAvaliacao: homeController.user.value.type == 'Professor',
+                            isCordenador: false,
+                            onPressedInitAvaliacao: () {
+                              controller.checkIfUserAlreadyGaveANote(controller.listTccs.value[index].id.toString()).then((value) {
+                                if (value.$1) {
+                                  snackBarMessenger(context: context, message: value.$2, color: Colors.red);
+                                } else {
+                                  controller.openReuniao(controller.listTccs.value[index]);
+                                }
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),

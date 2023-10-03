@@ -150,6 +150,7 @@ class TccController extends ChangeNotifier {
         table: db.tcc,
         body: {
           'aluno': Modular.get<HomeController>().user.value.email,
+          'nome_aluno': Modular.get<HomeController>().user.value.nome,
           'data_cadastro': DateTime.now().toString().substring(0, 16),
           'tema': tituloController.text,
           'link': linkController.text,

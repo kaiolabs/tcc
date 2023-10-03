@@ -39,7 +39,7 @@ class _CardTccState extends PageState<CardTcc, TccController> {
     return Column(
       children: [
         Visibility(
-          visible: !controller.isBancaComplete(widget.tcc),
+          visible: (controller.isBancaComplete(widget.tcc) && widget.isCordenador),
           child: Container(
             height: 70,
             width: MediaQuery.of(context).size.width,
@@ -72,12 +72,12 @@ class _CardTccState extends PageState<CardTcc, TccController> {
                 offset: const Offset(0, 1),
               ),
             ],
-            borderRadius: controller.isBancaComplete(widget.tcc)
-                ? const BorderRadius.all(Radius.circular(10))
-                : const BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  ),
+            // borderRadius: (controller.isBancaComplete(widget.tcc) && widget.isCordenador)
+            //     ? const BorderRadius.all(Radius.circular(10))
+            //     : const BorderRadius.only(
+            //         bottomLeft: Radius.circular(10),
+            //         bottomRight: Radius.circular(10),
+            //       ),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -267,7 +267,7 @@ class _CardTccState extends PageState<CardTcc, TccController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               TextPattern(
-                                text: 'Cordenador(a)',
+                                text: 'Coordenador(a)',
                                 color: Colors.white,
                               ).semiBold(),
                               const SizedBox(height: 10),
@@ -287,7 +287,7 @@ class _CardTccState extends PageState<CardTcc, TccController> {
                   Column(
                     children: [
                       SizedBox(
-                        height: 220,
+                        height: MediaQuery.of(context).size.height * 0.20,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

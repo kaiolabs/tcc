@@ -157,6 +157,7 @@ class _ReunioesState extends PageState<Reunioes, ReunioesController> {
                                   borderRadius: BorderRadius.circular(8),
                                   color: Colors.white,
                                 ),
+                                margin: const EdgeInsets.only(bottom: 10),
                                 child: Material(
                                   color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(8),
@@ -300,7 +301,7 @@ class _ReunioesState extends PageState<Reunioes, ReunioesController> {
                         width: MediaQuery.of(context).size.width * 0.35,
                         child: InputFieldPattern(
                           readOnly: true,
-                          label: 'Cordenador',
+                          label: 'coordenador',
                           controller: TextEditingController(text: controller.selected.value.nomeCordenador),
                         ),
                       ),
