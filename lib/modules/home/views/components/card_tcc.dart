@@ -39,7 +39,7 @@ class _CardTccState extends PageState<CardTcc, TccController> {
     return Column(
       children: [
         Visibility(
-          visible: !(controller.isBancaComplete(widget.tcc) && widget.isCordenador),
+          visible: !controller.isBancaComplete(widget.tcc) && widget.isCordenador,
           child: Container(
             height: 70,
             width: MediaQuery.of(context).size.width,
